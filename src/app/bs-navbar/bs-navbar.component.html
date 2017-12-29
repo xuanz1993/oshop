@@ -1,0 +1,31 @@
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+      <div class="navbar-header">
+          <!-- <a class="navbar-brand">
+            <img src="assets/img/ngx-bootstrap.svg" class="logo">
+          </a> -->
+          <span class="navbar-brand" routerLink="/">Oshop</span>
+      </div>
+      <ul class="nav navbar-nav">
+          <li><a routerLink="/shopping-card">
+            Shopping Card
+          </a></li>
+          <ng-template #anonymousUser>
+            <li><a  routerLink="/login">Login</a></li>
+          </ng-template>
+          <li class="dropdown" dropdown *ngIf="appUser; else anonymousUser"> <!-- {1} -->
+              <a dropdownToggle role="button"> <!-- {2} -->
+                {{appUser.name}}<span class="caret"></span></a>
+              <ul *dropdownMenu class="dropdown-menu"> <!-- {3} -->
+                  <li><a routerLink="/my/orders">My Orders</a></li>
+                  <ng-container *ngIf="appUser.isAdmin">
+                    <li><a routerLink="/admin/orders">Manage Orders</a></li>
+                    <li><a routerLink="/admin/products">Manage Products</a></li>
+                  </ng-container>
+                  <li><a (click)="logout()">Log Out</a></li>
+              </ul>
+          </li>
+      </ul>
+  </div>
+</nav>
